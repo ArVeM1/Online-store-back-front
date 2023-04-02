@@ -12,6 +12,12 @@ const NavbarComp = observer(() => {
     const {user} = useContext(Context)
     let navigate = useNavigate();
 
+    const logOut=()=>{
+        user.setUser({})
+        user.setIsAuth(false)
+        localStorage.removeItem('token')
+    }
+
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
@@ -25,12 +31,12 @@ const NavbarComp = observer(() => {
                         <Button
                             variant={"outline-light"}
                             style={{marginLeft: "20px"}}
-                            onClick={()=> navigate(LOGIN_ROUTE)}
+                            onClick={()=> logOut()}
                         >
                             Выйти</Button>
                     </Nav> :
                     <Nav className="ml-auto">
-                        <Button variant={"outline-light"} onClick={() => user.setIsAuth(true)}>Авторизация</Button>
+                        <Button variant={"outline-light"} onClick={() => navigate(LOGIN_ROUTE)}>Авторизация</Button>
                     </Nav>}
             </Container>
         </Navbar>
